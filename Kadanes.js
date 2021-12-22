@@ -13,15 +13,24 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 Input: nums = [1]
 Output: 1
 
+Approach:- include the case where all the values are in negative.
+
+ pick first and compare it with previous total if it is less than then update it with greater values.
 
  * 
  */
 
 const maxSubArray = function (nums) {
-  let sum = 0;
-  for (let i = 0; i < nums.length; i++) {
-    sum += i;
+  if (nums.length == 1) return nums[0];
+
+  let maxSum = nums[0],
+    currentMax = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    currentMax = Math.max(nums[i], currentMax + nums[i]);
+    maxSum = Math.max(currentMax, maxSum);
   }
+  return maxSum;
 };
 
-maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
+console.log("max sub array ", maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
